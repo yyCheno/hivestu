@@ -1,0 +1,13 @@
+hdfs dfs -rm -r -f   /user/sqoop/employees/dept_emp/*
+sqoop import  \
+--connect jdbc:mysql://rm-2zelozii20h4r9464vo.mysql.rds.aliyuncs.com:3306/employees \
+--username hive \
+--password Gdut14630 \
+--query "select * from dept_emp   where \$CONDITIONS" \
+--target-dir /user/sqoop/employees/dept_emp \
+--delete-target-dir \
+--num-mappers 1 \
+--compress \
+--compression-codec org.apache.hadoop.io.compress.SnappyCodec \
+--direct \
+--fields-terminated-by '\t'
